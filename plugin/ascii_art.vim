@@ -4,31 +4,25 @@
 " finish
 "endif
 let loaded_AsciiArt = 1
-
-let s:aDogTag = "Copyright (C) \<enter>\<enter>"
-
-"           __   _,--=\"=--,_   __                  "
-"          /  \.\"    .-.    \"./  \                "
-"         /  ,/  _   : :   _  \/` \                 "
-"         \  `| /o\  :_:  /o\ |\__/                 "
-"          `-'| :=\"~` _ `~\"=: |                   "
-"             \`     (_)     `/                     "
-"      .-\"-.   \      |      /   .-\"-.            "
-" .---{     }--|  /,.-'-.,\  |--{     }---.         "
-"  )  (_)_)_)  \_/`~-===-~`\_/  (_(_(_)  (          "
-" (        0 Error(s) 0 Warning(s)        )         "
-"  ) wjl@starnet                         (          "
-" '---------------------------------------'         "
+let s:asciiPicsDir = substitute(globpath(&rtp, 'ascii-pics/'), "\n", ',', 'g')
 
 """"""""""""""""""""""""""
 " Function comment
 """"""""""""""""""""""""""
 function! <SID>AsciiArtDogFunc()
-    echo 'hahhahah'
-    echo getcwd()
+    let s:asciiDogPicFile = s:asciiPicsDir.'dog.txt'
+    echo s:asciiDogPicFile
+
+    exec "normal A"."\<enter>"
+    for line in readfile( s:asciiDogPicFile )
+        exec "normal A"." ".line."\<enter>"
+    endfor
+    exec "normal A"."\<enter>"
+  
 endfunction
 
 """"""""""""""""""""""""""
 " Shortcuts...
 """"""""""""""""""""""""""
 command! -nargs=0 AArtDog :call <SID>AsciiArtDogFunc()
+
